@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy theming | Example</title>
-    <style>
-        html {
-            font-size: 24px;
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        button {
-            padding: 16px 24px;
-            border-radius: 24px;
-            border: unset;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy theming | Example</title>
+  <style>
+      html {
+          font-size: 24px;
+      }
+      body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+      }
+      .container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+      }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>
-            Hi there 👋🏼
-        </h1>
-        <button class="theme-toggle-button">
-            Switch to the dark mode
-        </button>
-    </div>
+  <div class="container">
+      <h1>
+          Hi there 👋🏼
+      </h1>
+  </div>
+<script>
+  var availableThemes = {
+    "light": {
+      id: "light"
+    },
+    "dark": {
+      id: "dark"
+    },
+    "rainbow": {
+      id: "rainbow"
+    }
+  };
+  var selectedTheme = availableThemes.light.id
+</script>
 </body>
 </html>
