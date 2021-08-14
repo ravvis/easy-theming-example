@@ -48,7 +48,7 @@
     <h1>
         Hi there 👋🏼
     </h1>
-    <div class="theme-switch-wrapper">
+    <div id="theme-switch-wrapper">
       <button class="theme-switch selected" data-theme="light">
         Light
       </button>
@@ -72,7 +72,32 @@
         id: "rainbow"
       }
     };
-    var selectedTheme = availableThemes.light.id
+    var selectedTheme = availableThemes.light.id;
+    
+    // get switchThemeWrapper and add an onclick event listener
+    const switchesWrapper = document.getElementById("theme-switch-wrapper");
+
+    switchesWrapper.onclick = function(event){
+      // If the target element is a button and it is not already selected -> we will fire the chooseTheme function with the clicked themeId
+      if(event.target.tagName == "BUTTON" && !event.target.classList.contains("selected")){
+        chooseTheme(event.target.getAttribute("data-theme"))
+      }
+    }
+
+    function chooseTheme(themeId) {
+      selectedTheme = themeId;
+
+      // Updating selected theme switch
+      const allSwitches = [...switchesWrapper.getElementsByClassName("theme-switch")];
+      allSwitches.forEach(function(switchBtn){
+        if(switchBtn.getAttribute("data-theme") == themeId){
+          switchBtn.classList.add("selected");
+        }
+        else {
+          switchBtn.classList.remove("selected");
+        }
+      })
+    }
   </script>
 </body>
 </html>
