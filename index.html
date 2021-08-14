@@ -6,72 +6,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Easy theming | Example</title>
   <style>
-      html {
-          font-size: 24px;
-      }
-      body {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          min-height: 100vh;
-      }
-      .container {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-      }
-      .theme-switch-wrapper{
-        display: flex;
-      }
-      .theme-switch{
-        margin: 16px;
-        padding: 10px 24px;
-        font-size: 1rem;
-        border: unset;
-        border-radius: 24px;
-        cursor: pointer;
-      }
-      .theme-switch:hover{
-        transition: all 0.6s ease;
-        box-shadow: 0 6px 30px -10px black;;
-      }
-      .theme-switch.selected{
-        cursor: default;
-        background-color: cyan;
-      }
+    html {
+      font-size: 24px;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .theme-switch-wrapper{
+      display: flex;
+    }
+    .theme-switch{
+      margin: 16px;
+      padding: 10px 24px;
+      font-size: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 1px 6px rgb(0 0 0 / 8%);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .theme-switch:hover:not(.selected){
+      transition: all 0.6s ease;
+      box-shadow: 0 6px 30px -10px black;;
+    }
+    .theme-switch.selected{
+      cursor: default;
+      border: 2px solid black;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-      <h1>
-          Hi there 👋🏼
-      </h1>
-      <div class="theme-switch-wrapper">
-        <button class="theme-switch selected" data-theme="light">
-          Light
-        </button>
-        <button class="theme-switch" data-theme="dark">
-          Dark
-        </button>
-        <button class="theme-switch" data-theme="rainbow">
-          Rainbow
-        </button>
-      </div>
+    <h1>
+        Hi there 👋🏼
+    </h1>
+    <div class="theme-switch-wrapper">
+      <button class="theme-switch selected" data-theme="light">
+        Light
+      </button>
+      <button class="theme-switch" data-theme="dark">
+        Dark
+      </button>
+      <button class="theme-switch" data-theme="rainbow">
+        Rainbow
+      </button>
+    </div>
   </div>
-<script>
-  var availableThemes = {
-    "light": {
-      id: "light"
-    },
-    "dark": {
-      id: "dark"
-    },
-    "rainbow": {
-      id: "rainbow"
-    }
-  };
-  var selectedTheme = availableThemes.light.id
-</script>
+  <script>
+    var availableThemes = {
+      "light": {
+        id: "light"
+      },
+      "dark": {
+        id: "dark"
+      },
+      "rainbow": {
+        id: "rainbow"
+      }
+    };
+    var selectedTheme = availableThemes.light.id
+  </script>
 </body>
 </html>
