@@ -6,8 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Easy theming | Example</title>
   <style>
+    :root {
+      --primary-color: black;
+      --bg: white;
+    }
     html {
       font-size: 24px;
+      color: var(--primary-color);
+      background: var(--bg);
+      animation: var(--animation);
+      background-size: var(--bg-size);
     }
     body {
       display: flex;
@@ -41,6 +49,17 @@
       cursor: default;
       border: 2px solid black;
     }
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -61,17 +80,35 @@
     </div>
   </div>
   <script>
-    var availableThemes = {
-      "light": {
-        id: "light"
-      },
-      "dark": {
-        id: "dark"
-      },
-      "rainbow": {
-        id: "rainbow"
-      }
-    };
+var availableThemes = {
+  "light": {
+    id: "light",
+    styleVariables: {
+      "--primary-color": "black",
+      "--bg": "white",
+      "--bg-size": "unset",
+      "--animation": "unset"
+    }
+  },
+  "dark": {
+    id: "dark",
+    styleVariables: {
+      "--primary-color": "white",
+      "--bg": "black",
+      "--bg-size": "unset",
+      "--animation": "unset"
+    }
+  },
+  "rainbow": {
+    id: "rainbow",
+    styleVariables: {
+      "--primary-color": "black",
+      "--bg": "linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3)",
+      "--bg-size": "400% 400%",
+      "--animation": "gradient 15s ease infinite"
+    }
+  }
+};
     var selectedTheme = availableThemes.light.id;
     
     // get switchThemeWrapper and add an onclick event listener
@@ -86,6 +123,12 @@
 
     function chooseTheme(themeId) {
       selectedTheme = themeId;
+
+      const stylesToApply = availableThemes[themeId].styleVariables;
+
+      Object.keys(stylesToApply).forEach((styleVariable) => {
+        document.querySelector(':root').style.setProperty(styleVariable, stylesToApply[styleVariable]);
+      })
 
       // Updating selected theme switch
       const allSwitches = [...switchesWrapper.getElementsByClassName("theme-switch")];
