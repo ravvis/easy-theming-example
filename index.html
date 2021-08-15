@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme-selected="light">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Easy theming | Example</title>
   <style>
-    :root {
+    :root[data-theme-selected="light"] {
       --primary-color: black;
       --bg: white;
+      --bg-size: unset;
+      --animation: unset;
+    }
+    :root[data-theme-selected="dark"] {
+      --primary-color: white;
+      --bg: black;
+      --bg-size: unset;
+      --animation: unset;
+    }
+    :root[data-theme-selected="rainbow"] {
+      --primary-color: black;
+      --bg: linear-gradient(130deg,#fff 0,#adfbda 10%,#97dcf9 30%,#fda399 50%,#94fb9e 70%,#f7ff99 90%,#fff 100%);
+      --bg-size: 400% 400%;
+      --animation: gradient 15s ease infinite;
     }
     html {
       font-size: 24px;
@@ -68,70 +82,20 @@
         Hi there 👋🏼
     </h1>
     <div id="theme-switch-wrapper">
-      <button class="theme-switch selected" data-theme="light">
+      <button class="theme-switch selected" data-theme="light" onclick="chooseTheme('light')">
         Light
       </button>
-      <button class="theme-switch" data-theme="dark">
+      <button class="theme-switch" data-theme="dark" onclick="chooseTheme('dark')">
         Dark
       </button>
-      <button class="theme-switch" data-theme="rainbow">
+      <button class="theme-switch" data-theme="rainbow" onclick="chooseTheme('rainbow')">
         Rainbow
       </button>
     </div>
   </div>
   <script>
-var availableThemes = {
-  "light": {
-    id: "light",
-    styleVariables: {
-      "--primary-color": "black",
-      "--bg": "white",
-      "--bg-size": "unset",
-      "--animation": "unset"
-    }
-  },
-  "dark": {
-    id: "dark",
-    styleVariables: {
-      "--primary-color": "white",
-      "--bg": "black",
-      "--bg-size": "unset",
-      "--animation": "unset"
-    }
-  },
-  "rainbow": {
-    id: "rainbow",
-    styleVariables: {
-      "--primary-color": "black",
-      "--bg": "linear-gradient(130deg,#fff 0,#adfbda 10%,#97dcf9 30%,#fda399 50%,#94fb9e 70%,#f7ff99 90%,#fff 100%)",
-      "--bg-size": "400% 400%",
-      "--animation": "gradient 15s ease infinite"
-    }
-  }
-};
-    var selectedTheme = availableThemes.light.id;
-    
-    // get switchThemeWrapper and add an onclick event listener
-    const switchesWrapper = document.getElementById("theme-switch-wrapper");
-
-    switchesWrapper.onclick = function(event){
-      // If the target element is a button and it is not already selected -> we will fire the chooseTheme function with the clicked themeId
-      if(event.target.tagName == "BUTTON" && !event.target.classList.contains("selected")){
-        chooseTheme(event.target.getAttribute("data-theme"))
-      }
-    }
-
-    function chooseTheme(themeId) {
-      selectedTheme = themeId;
-
-      const stylesToApply = availableThemes[themeId].styleVariables;
-
-      Object.keys(stylesToApply).forEach((styleVariable) => {
-        document.querySelector(':root').style.setProperty(styleVariable, stylesToApply[styleVariable]);
-      })
-
-      // Updating selected theme switch
-      const allSwitches = [...switchesWrapper.getElementsByClassName("theme-switch")];
+    function updateSelectedSwitch(themeId){
+      const allSwitches = [...document.getElementsByClassName("theme-switch")];
       allSwitches.forEach(function(switchBtn){
         if(switchBtn.getAttribute("data-theme") == themeId){
           switchBtn.classList.add("selected");
@@ -140,6 +104,13 @@ var availableThemes = {
           switchBtn.classList.remove("selected");
         }
       })
+    }
+
+    function chooseTheme(themeId) {
+      updateSelectedSwitch(themeId);
+
+      // set the data-theme-selected attribute to reflect the updated theme
+      document.querySelector(':root').setAttribute("data-theme-selected", themeId);
     }
   </script>
 </body>
